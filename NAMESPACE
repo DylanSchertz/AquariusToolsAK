@@ -3,7 +3,6 @@
 export(AccessAquarius)
 export(downloadaquariusdata)
 export(finddatasets)
-export(hello)
 export(multipleselectionmenu)
 export(searchDatasetIDs)
 export(searchLocations)
