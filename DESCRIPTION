@@ -3,7 +3,7 @@ Title: Search and Download Aquarius Data
 Version: 0.0.0.9000
 Authors@R: 
     person("Dylan", "Schertz", , "Dylan_Schertz@nps.gov", role = c("aut", "cre"),
-           comment = c(ORCID = "DylanSchertz-ORCID-ID"))
+           comment = c(""))
 Description: Connects with Aquarius and mass downloads data across multiple sites.
 License: MIT + file LICENSE
 Encoding: UTF-8

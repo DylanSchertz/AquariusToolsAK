@@ -15,6 +15,11 @@
 #' @export
 #'
 #' @examples
+#' #ParameterTable <- finddatasets(sites=c("BELA-088", "BELA-108", "KOVA-085", "YUCH-005"),
+#' #                               parameters = c("LakeDepth", "SedimentTemperatureC","DissolvedOxygen(ODOconc)","pH","SpecificConductance(SpCond)","Temperature"),
+#' #                               searchterms = c("Pressure_LakeDepth@", "Pressure_BottomTemp@", "DOconc@", "Sonde_pH@", "Sonde_SpCond@", "Sonde_Temp@"),
+#' #                                removeterms = "synoptic")
+#'
 #' # Downloading the lake data fully based on the defaults
 #' DownloadedData <- downloadaquariusdata(ParameterTable)
 #'
@@ -27,12 +32,7 @@
 #' # Downloading the lake data but only from the sites "KOVA-085" and "YUCH-005" but renaming the KOVA site as "Site1" and the YUCH site as "Site2" and "Site3".
 #' DownloadedData <- downloadaquariusdata(ParameterTable, sites = c("KOVA-085","YUCH-005", "YUCH-005") , site.rename = c("Site1","Site2", "Site3"))
 #'
-#' # Here's the function I run to download all of the ARCN/CAKN climate and lake data.
-#' DownloadedData <- downloadaquariusdata(ParameterTable,
-#'                                        sites = c("BELA-088", "BELA-108", "DENA-018", "DENA-023", "KOVA-085", "KOVA-086", "NOAT-052", "NOAT-107", "WRST-005", "WRST-016", "YUCH-004", "YUCH-005", "KELA2", "KELA2","KAVA2", "KAVA2", "LMHA2", "LMHA2","CZOA2", "CZOA2", "BELA_SRTA2", "BELA_SRTA2", "YUCH_CLCA2", "YUCH_CLCA2"),
-#'                                       site.rename = c("BELA-088", "BELA-108", "DENA-018","DENA-023","KOVA-085", "KOVA-086", "NOAT-052", "NOAT-107", "WRST-005", "WRST-016", "YUCH-004","YUCH-005","NOAT-052", "NOAT-107", "KOVA-085", "KOVA-086", "DENA-018", "DENA-023", "WRST-016","WRST-005", "BELA-088", "BELA-108", "YUCH-004", "YUCH-005"),
-#')
-#'
+
 
 downloadaquariusdata <- function(datasets, sites, startyear, endyear, site.rename){
   ## If a list of sites is not given.
@@ -80,7 +80,7 @@ downloadaquariusdata <- function(datasets, sites, startyear, endyear, site.renam
   ## Looping through each of the sites
   for(i in unique(sites)){
     ## Looping through each of the provided parameter IDs for that site
-    for(j in parameters[datasets[,i]!=""]){
+    for(j in parameters[datasets[,i]!="" & is.na(datasets[,i])==FALSE]){
       ## If there was no site renaming
       if(missing(site.rename)){
         ## Reporting which site and parameter is being downloaded
@@ -145,3 +145,4 @@ downloadaquariusdata <- function(datasets, sites, startyear, endyear, site.renam
   ## Returning all of the data in a single table
   return(LongTable)
 }
+
